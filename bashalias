@@ -1,66 +1,105 @@
-..='cd ..'
-...='cd .. && cd ..'
-c=clear
-cd=z
-cp='cp -iv'
-darkmode='~/user_scripts/theme_matugen/matugen_config.sh --mode dark'
-df='df -hT'
-diff='delta --side-by-side'
-disk_usage='sudo btrfs filesystem usage /'
-dusky_force_sync_github='~/user_scripts/update_dusky/dusky_force_sync_github.sh'
-edit-in-kitty='kitten edit-in-kitty'
-egrep='egrep --color=auto'
-fgrep='fgrep --color=auto'
-gc='git commit -m '
-gca='git commit -a -m '
-gco='git checkout '
-gd='git diff'
-gds='git diff -s'
-gf='git fetch'
-git_dusky='/usr/bin/git --git-dir=$HOME/dusky/ --work-tree=$HOME'
-git_dusky_add_list='(cd $HOME && git_dusky add --pathspec-from-file=.git_dusky_list)'
-git_dusky_restore='echo "git --git-dir=$HOME/dusky/ --work-tree=$HOME reset --hard HEAD" && git_dusky reset --hard HEAD'
-gitdelta='git_dusky_add_list && git_dusky diff HEAD'
-gl='git log --oneline'
-gp='git push'
-gpl='git pull'
-grep='grep --color=auto'
-gs='git status'
-gss='git status -s'
-io_drives='~/user_scripts/drives/io_monitor.sh'
-iphone_vnc='~/user_scripts/networking/iphone_vnc.sh'
-keydd='sudo nvim /etc/keyd/default.conf'
-la='eza -la --icons --git --group-directories-first'
-lazygit_dusky='lazygit --git-dir=$HOME/dusky/ --work-tree=$HOME'
-lf=yazi
-lightmode='~/user_scripts/theme_matugen/matugen_config.sh --mode light'
-ln='ln -v'
-lock='$HOME/user_scripts/drives/drive_manager.sh lock'
-ls='eza -lah --icons --git --group-directories-first'
-lss='clear && eza -lah --icons --git --group-directories-first'
-lt='eza --tree --level=2 --icons'
-mv='mv -iv'
-ncdu=gdu
-nvidia_bind='~/user_scripts/nvidia_passthrough/nvidia_vfio_bind_unbind.sh --bind'
-nvidia_unbind='~/user_scripts/nvidia_passthrough/nvidia_vfio_bind_unbind.sh --unbind'
-parus='paru -S'
-pipes=pipes.sh
-rc='nvim ~/.zshrc'
-rm='rm -I'
-run-help=man
-run_sysbench='~/user_scripts/performance/sysbench_benchmark.sh'
-sb='playerctl --player=spotify previous'
-sendlogs='~/user_scripts/arch_setup_scripts/send_logs.sh --auto'
-sn='playerctl --player=spotify next'
-sp='playerctl --player=spotify play-pause'
-src='source ~/.zshrc'
-tl='java -jar /home/directpass/Games/TLauncher.v16/TLauncher.jar'
-unlock='$HOME/user_scripts/drives/drive_manager.sh unlock'
-update_dusky='~/user_scripts/update_dusky/update_dusky.sh'
-v=nvim
-vf='nvim $(fzf)'
-which-command=whence
-wifi_security='~/user_scripts/networking/ax201_wifi_testing.sh'
-yt1080='yt-dlp -f \"bestvideo[height=1080]+bestaudio/best\" --merge-output-format mp4'
-yt720='yt-dlp -f \"bestvideo[height=720]+bestaudio/best\" --merge-output-format mp4'
-ytmusic='yt-dlp -f \"bestaudio/best\" mp3'
+eval "$(oh-my-posh init zsh)"
+
+#LocalSend
+alias localsendfix='sudo ufw allow 53317/udp && sudo ufw allow 53317/tcp && sudo ufw reload'
+
+
+# Fun / misc
+alias e='exit 0'
+alias rc='nvim ~/.zshrc'
+alias src='source ~/.zshrc'
+alias ra='nvim ~/.zsh_aliases'
+alias parus='paru -S --noconfirm'
+alias pipes='pipes.sh'
+alias keydd='sudo nvim /etc/keyd/default.conf && sudo keyd reload'
+alias keydstart='sudo systemctl enable --now keyd && sudo keyd reload'
+
+# Navigation
+alias .='lss'
+alias ..='cd .. && lss'
+alias ...='cd .. && cd .. && lss'
+alias c='clear'
+alias home='cd ~ && clear'
+alias cd='z'
+
+# File operations
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias ln='ln -v'
+alias rm='rm -I'
+
+
+# Listing
+alias ls='eza -lah --long --icons --git --group-directories-first'
+alias la='eza -la --icons --git --group-directories-first'
+alias lt='eza --tree --level=2 --icons'
+alias lss='clear && eza -lah --icons --git --group-directories-first'
+
+# Disk / system
+alias df='df -hT'
+alias disk_usage='sudo btrfs filesystem usage /'
+
+# Grep colors
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# Git (normal)
+alias gs='git status'
+alias gss='git status -s'
+alias gc='git commit -m '
+alias gca='git commit -a -m '
+alias gco='git checkout '
+alias gd='clear && git diff'
+alias gds='git diff -s'
+alias gf='git fetch'
+alias gl='git log --oneline'
+alias gp='git fetch && git push'
+alias gpl='git fetch && git pull'
+
+# Git (dusky bare repo)
+alias git_dusky='/usr/bin/git --git-dir=$HOME/dusky/ --work-tree=$HOME'
+alias git_dusky_add_list='(cd $HOME && git_dusky add --pathspec-from-file=.git_dusky_list)'
+alias git_dusky_restore='echo "git --git-dir=$HOME/dusky/ --work-tree=$HOME reset --hard HEAD" && git_dusky reset --hard HEAD'
+alias gitdelta='git_dusky_add_list && git_dusky diff HEAD'
+alias lazygit_dusky='lazygit --git-dir=$HOME/dusky/ --work-tree=$HOME'
+
+# Editors / config
+alias v='nvim'
+alias vf='nvim $(fzf)'
+alias vr="nvim -c \"'0\""
+
+# CLI tools
+alias lf='yazi'
+alias diff='delta --side-by-side'
+alias which-command='whence'
+alias run-help='man'
+alias nano='nvim'
+
+# Scripts
+alias darkmode='$HOME/user_scripts/theme_matugen/matugen_config.sh --mode dark'
+alias lightmode='$HOME/user_scripts/theme_matugen/matugen_config.sh --mode light'
+alias update_dusky='$HOME/user_scripts/update_dusky/update_dusky.sh'
+alias dusky_force_sync_github='$HOME/user_scripts/update_dusky/dusky_force_sync_github.sh'
+alias sendlogs='$HOME/user_scripts/arch_setup_scripts/send_logs.sh --auto'
+
+alias io_drives='$HOME/user_scripts/drives/io_monitor.sh'
+alias lock='$HOME/user_scripts/drives/drive_manager.sh lock'
+alias unlock='$HOME/user_scripts/drives/drive_manager.sh unlock'
+
+alias iphone_vnc='$HOME/user_scripts/networking/iphone_vnc.sh'
+alias wifi_security='$HOME/user_scripts/networking/ax201_wifi_testing.sh'
+
+alias nvidia_bind='$HOME/user_scripts/nvidia_passthrough/nvidia_vfio_bind_unbind.sh --bind'
+alias nvidia_unbind='$HOME/user_scripts/nvidia_passthrough/nvidia_vfio_bind_unbind.sh --unbind'
+
+alias run_sysbench='$HOME/user_scripts/performance/sysbench_benchmark.sh'
+
+# Media / player
+alias sp='playerctl --player=spotify play-pause'
+alias sn='playerctl --player=spotify next'
+alias sb='playerctl --player=spotify previous'
+
+# Minecraft TLauncher
+alias tl='java -jar /home/directpass/Games/TLauncher.v16/TLauncher.jar'
+
